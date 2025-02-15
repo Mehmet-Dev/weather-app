@@ -1,0 +1,25 @@
+# Ignore environment files (API keys, credentials)
+.env
+app/config.php
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore vendor & dependencies (if using Composer)
+vendor/
+composer.lock
+
+# Ignore IDE & editor config files
+.vscode/
+.idea/
+*.bak
+*.swp
+
+# Ignore log & cache files
+logs/
+cache/
+
+# Ignore unnecessary files from operating system
+*.log
+*.tmp
