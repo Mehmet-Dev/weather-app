@@ -1,6 +1,6 @@
 # Ignore environment files (API keys, credentials)
 .env
-app/config.php
+config/config.php
 
 # Ignore system files
 .DS_Store
