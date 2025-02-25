@@ -26,7 +26,7 @@ body, html
     align-items: center;
 }
 
-.centered-box
+/* .centered-box
 {
     width: 800px;
     padding: 20px;
@@ -34,4 +34,47 @@ body, html
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
+} */
+
+.centered-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.weather-container {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.icon-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.details-box {
+    flex: 2;
+}
+
+.details-box h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.details-box p {
+    margin: 5px 0;
+}
+
+.no-style {
+    all: unset;
+    cursor: pointer;
+    color: red;
 }

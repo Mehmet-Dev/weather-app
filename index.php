@@ -2,23 +2,69 @@
 include_once('config/config.php');
 include_once('includes/WeatherController.php');
 
+if(!isset($_SESSION['viewInCelsius']))
+{
+    $_SESSION['viewInCelsius'] = true;
+}
+
+if($_SESSION['viewInCelsius'])
+{
+    $string = "View in F";
+    $unit = "C";
+} else
+{
+    $string = "View in C";
+    $unit = "F";
+}
+
+if (isset($_GET['city-name'])) {
+    $cityName = $_GET['city-name'];
+} else $cityName = "London";
+
 $controller = new WeatherController();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+
     <div class="centered-box">
-        <?php $controller->retrieveWeatherData("London"); ?>
+        <?php
+        $weather = $controller->retrieveWeatherData($cityName);
+        if (!$weather) {
+            echo '<button class="no-style" id="different-city">City not found... Search for different city</button>';
+        } else {
+        ?>
+
+            <div class="weather-container">
+                <div class="icon-box">
+                    <img src="https://openweathermap.org/img/wn/<?php echo $weather->icon; ?>@2x.png" alt="Weather Icon">
+                </div>
+
+                <div class="details-box">
+                    <h2><?php echo $weather->country; ?> - <?php echo $weather->city; ?></h2>
+                    <p>Condition: <?php echo $weather->condition; ?></p>
+                    <p>Temperature: <?php echo round($weather->temp, 1) . " $unit"; ?> </p>
+                    <p>Feels Like: <?php echo round($weather->feels_temp, 1) . " $unit" ?></p>
+                    <p>Wind Speed: <?php echo $weather->wind_speed; ?> m/s</p>
+                    <p><a class="no-styling" href="changeUnits.php"><?php echo $string; ?></a></p>
+                    <button class="no-style" id="different-city">Search for different city</button>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 
     <?php include_once('views/footer.php') ?>
+    <script src="js/jquery.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
