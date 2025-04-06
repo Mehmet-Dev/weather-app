@@ -15,7 +15,6 @@ function retrieveWeatherData(string $cityName)
         return false;
     }
 
-    // Check if the HTTP status is 200 OK
     if (!str_contains($http_response_header[0], "200")) {
         return false;
     }
@@ -26,9 +25,13 @@ function retrieveWeatherData(string $cityName)
         return false;
     }
 
-    $codes = countryCodes();
+    $countryCode = $data['sys']['country'] ?? null;
+    if ($countryCode === null || !isset($codes[$countryCode])) {
+        $country = 'Unknown';
+    } else {
+        $country = $codes[$countryCode];
+    }
 
-    $country = $codes[$data['sys']['country']];
     $condition = $data['weather'][0]['main'] ?? 'Unknown';
     $icon = $data['weather'][0]['icon'] ?? '01d';
     $temp = convertUnit($data['main']['temp'] ?? 0, checkSession());
@@ -37,6 +40,7 @@ function retrieveWeatherData(string $cityName)
 
     return new Weather($country, $cityName, $condition, $icon, $temp, $feels, $wind);
 }
+
 
 function countryCodes()
 {
