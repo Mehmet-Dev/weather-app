@@ -51,7 +51,7 @@ if (isset($_GET['city-name'])) { // If no city name is provided show London by d
                     <p>Condition: <?php echo $weather->condition; ?></p>
                     <p>Temperature: <?php echo round($weather->temp, 1) . " $unit"; ?> </p>
                     <p>Feels Like: <?php echo round($weather->feels_temp, 1) . " $unit" ?></p>
-                    <p>Wind Speed: <?php echo $weather->wind_speed; ?> m/s</p>
+                    <p>Wind Speed: <?php echo $weather->wind_speed; ?> m/s, <?php echo windSpeedMessage($weather->wind_speed); ?></p>
                     <p><a class="no-styling" href="changeUnits.php"><?php echo $string; ?></a></p>
                     <button class="no-style" id="different-city">Search for different city</button>
                 </div>
