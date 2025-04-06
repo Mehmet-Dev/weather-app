@@ -1,6 +1,6 @@
 <?php
 
-class Weather
+class Weather // A simple class structure because why not
 {
     public string $country;
     public string $city;

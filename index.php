@@ -1,13 +1,12 @@
 <?php
-include_once('config/config.php');
 include_once('includes/WeatherController.php');
 
-if(!isset($_SESSION['viewInCelsius']))
+if(!isset($_SESSION['viewInCelsius'])) // If it's not already initialized, set it
 {
     $_SESSION['viewInCelsius'] = true;
 }
 
-if($_SESSION['viewInCelsius'])
+if($_SESSION['viewInCelsius']) // if it's true, change some parts of the website around
 {
     $string = "View in F";
     $unit = "C";
@@ -17,11 +16,9 @@ if($_SESSION['viewInCelsius'])
     $unit = "F";
 }
 
-if (isset($_GET['city-name'])) {
+if (isset($_GET['city-name'])) { // If no city name is provided show London by default
     $cityName = $_GET['city-name'];
 } else $cityName = "London";
-
-$controller = new WeatherController();
 ?>
 
 <!DOCTYPE html>
@@ -38,8 +35,8 @@ $controller = new WeatherController();
 
     <div class="centered-box">
         <?php
-        $weather = $controller->retrieveWeatherData($cityName);
-        if (!$weather) {
+        $weather = retrieveWeatherData($cityName); // Get weather data
+        if (!$weather) { // If the city hasn't been found or any other error, show error message.
             echo '<button class="no-style" id="different-city">City not found... Search for different city</button>';
         } else {
         ?>
